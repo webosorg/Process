@@ -1,0 +1,35 @@
+{
+  "name": "process-js",
+  "version": "0.0.1",
+  "description": "Creator of processes, which can get source and run it in another thread using web workers with promises.",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "babel --plugins transform-object-rest-spread src --presets babel-preset-es2015 --out-dir dist",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webosorg/Process.git"
+  },
+  "keywords": [
+    "webworker",
+    "process",
+    "thread",
+    "promise",
+    "process-js"
+  ],
+  "author": "SurenAt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/webosorg/Process/issues"
+  },
+  "homepage": "https://github.com/webosorg/Process#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1"
+  },
+  "dependencies": {
+    "promise-worker": "^1.1.1"
+  }
+}
