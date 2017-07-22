@@ -24,9 +24,10 @@ export default class MakeWorkerSource {
       `
         importScripts(${this.deps});
         const fn = ${this.fn};
-        registerPromiseWorker(
-          msg => fn(msg)
-        );
+        self.onmessage = msg => {
+          const result = fn(msg.data);
+          self.postMessage(result);
+        }
       `
     );
   }
