@@ -2,7 +2,7 @@
  * ProcessJs.
  * Creator of processes, which can run on another thread using web workers and promises.
  * @module process.js
- * @version 1.0.0
+ * @version 0.0.1
  * @author @SurenAt93
  */
 
