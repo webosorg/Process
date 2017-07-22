@@ -9,7 +9,9 @@ import { getDefaultOptions } from './defaultOptions.js';
 
 import MakeWorkerSource from './utils/MakeWorkerSource.js';
 
-import PromiseWorker from 'promise-worker';
+import { generateRandomId } from './utils/generators.js';
+
+import Thread from './thread.js';
 
 /**
  * The Process class
@@ -27,11 +29,12 @@ export default class Process {
 
       const currentOptions = options ? { ...options, ...defaultOptions } : defaultOptions;
 
-      const { id, name, autoTerminate } = currentOptions;
+      const { id, name } = currentOptions;
 
       this.id = id;
       this.name = name;
-      this.autoTerminate = autoTerminate;
+
+      this.__threads = {};
     }
 
     /**
@@ -60,9 +63,7 @@ export default class Process {
 
         } else {
 
-            const currentDeps = [ ...deps, 'https://npmcdn.com/promise-worker/dist/promise-worker.register.js' ];
-
-            let workerSource = new MakeWorkerSource(fn, currentDeps).workerSource();
+            let workerSource = new MakeWorkerSource(fn, deps).workerSource();
 
             const source = workerSource.toString();
 
@@ -70,9 +71,13 @@ export default class Process {
 
             let blob = new Blob([ code ], {type: 'application/javascript'});
 
-            this.__worker = new Worker(URL.createObjectURL(blob));
+            const worker = new Worker(URL.createObjectURL(blob));
 
-            return new PromiseWorker(this.__worker);
+            const currentThreadId = generateRandomId();
+
+            this.__threads[currentThreadId] = new Thread(worker);
+
+            return this.__threads[currentThreadId];
         }
     }
 
@@ -82,6 +87,9 @@ export default class Process {
      */
 
     kill() {
-        this.__worker.terminate();
+        Object.keys(this.__threads).forEach(threadId => {
+            this.__threads[threadId].kill(); 
+        });
+        this.__threads = {};
     }
 }
