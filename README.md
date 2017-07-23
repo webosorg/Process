@@ -1,5 +1,7 @@
 # Process-js
 
+[![(a histogram of downloads)](https://nodei.co/npm-dl/process-js.png?height=3)](https://npmjs.org/package/process-js)
+
 ## Synopsys
 
 Creation of Dynamic Dedicated WebWorkers, definition of dependencies, promise support.
@@ -76,6 +78,8 @@ process
 ```
 
 ## Install
+
+[![(npm package version)](https://nodei.co/npm/process-js.png?downloads=true&downloadRank=true)](https://npmjs.org/package/process-js)
 
 ### Install for usage
 
