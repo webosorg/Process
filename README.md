@@ -51,11 +51,11 @@ const process = new Process;
 
 process
 	.setSource(
-	  num => num ** 2
+		num => num ** 2
 	)
 	.postMessage(12)
 	.then(
-	  result => console.log('Log ::: Result ::: ', result)
+		result => console.log('Log ::: Result ::: ', result)
 	);
 ```
 
@@ -68,7 +68,7 @@ const process = new Process;
 
 process
 	.setSource(
-	  arr => _.sortBy(arr),
+		arr => _.sortBy(arr),
     ['https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js']
 	)
 	.postMessage([3, 2, 0, 1])
@@ -138,7 +138,6 @@ process
 	.then(
 	  result => console.log('Log ::: Result ::: ', result)
 	);
-
 ```
 
 #### With dependencies
@@ -153,7 +152,7 @@ const process = new Process;
 process
   // set source (fn and deps)
 	.setSource(
-    // fn
+  	// fn
 	  arr => _.sortBy(arr),
     // array of dependencies
     ['https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js']
@@ -184,14 +183,14 @@ const calc_03 = process_02.setSource(
 
 Promise.all(
     [
-       calc_01.postMessage([3, 1, 2]),
-	     calc_02.postMessage(12),
-       calc_03.postMessage(['x', 'y', 'z', 'a', 123])
-	  ]
+    	calc_01.postMessage([3, 1, 2]),
+	    calc_02.postMessage(12),
+      calc_03.postMessage(['x', 'y', 'z', 'a', 123])
+	]
 )
 .then(result => {
-    process_01.kill();
-    process_02.kill();
-    console.log('Log ::: Result ::: ', result);
+	process_01.kill();
+  process_02.kill();
+  console.log('Log ::: Result ::: ', result);
 });
 ```
