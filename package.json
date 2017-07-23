@@ -1,7 +1,7 @@
 {
   "name": "process-js",
   "version": "0.1.0",
-  "description": "Creator of processes, which can get source and run it in another thread using web workers with promises.",
+  "description": "Creation of Dynamic Dedicated WebWorkers, definition of dependencies, promise support.",
   "main": "./dist/process.js",
   "scripts": {
     "build": "babel --plugins transform-object-rest-spread src --presets babel-preset-es2015 --out-dir dist",
