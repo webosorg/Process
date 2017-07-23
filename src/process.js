@@ -1,13 +1,13 @@
 /**
  * ProcessJs.
- * Creator of processes, which can run on another thread using web workers and promises.
+ * Creation of Dynamic Dedicated WebWorkers, definition of dependencies, promise support.
  * @module process.js
  * @author @SurenAt93
  */
 
 import { getDefaultOptions } from './defaultOptions.js';
 
-import MakeWorkerSource from './utils/MakeWorkerSource.js';
+import CreateWorkerSource from './utils/CreateWorkerSource.js';
 
 import { generateRandomId } from './utils/generators.js';
 
@@ -20,7 +20,8 @@ import Thread from './thread.js';
 export default class Process {
 
     /**
-     * Create a default options.
+     * Create a default options and hash of threads.
+     * @param {Object} options - The options for instance of Process
      */
 
     constructor(options) {
@@ -48,8 +49,8 @@ export default class Process {
     /**
      * Public method for setting source for process
      * @param {Function} fn - The function, which should run in new process
-     * @param {Array} deps - Optionsl ::: Dependencies for new env
-     * @returns {Promise} - The Promisified worker
+     * @param {Array} deps - Optional ::: Dependencies for new env
+     * @returns {Thread} - The Promisified worker
      */
 
     setSource(fn, deps = []) {
@@ -63,7 +64,7 @@ export default class Process {
 
         } else {
 
-            let workerSource = new MakeWorkerSource(fn, deps).workerSource();
+            let workerSource = new CreateWorkerSource(fn, deps).workerSource();
 
             const source = workerSource.toString();
 
