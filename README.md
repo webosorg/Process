@@ -95,7 +95,7 @@ or
 yarn add process-js
 ```
 
-**Latest githubbed version :::**
+**Latest version available in GitHub :::**
 
 ```
 npm i https://github.com/webosorg/Process
