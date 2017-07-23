@@ -1,6 +1,6 @@
 {
   "name": "process-js",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Creation of Dynamic Dedicated WebWorkers, definition of dependencies, promise support.",
   "main": "./dist/process.js",
   "scripts": {
