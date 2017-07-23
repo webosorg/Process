@@ -50,13 +50,13 @@ import Process from 'process-js';
 const process = new Process;
 
 process
-	.setSource(
-		num => num ** 2
-	)
-	.postMessage(12)
-	.then(
-		result => console.log('Log ::: Result ::: ', result)
-	);
+  .setSource(
+    num => num ** 2
+  )
+  .postMessage(12)
+  .then(
+    result => console.log('Log ::: Result ::: ', result)
+  );
 ```
 
 process-js also allows to define dependencies for workers
@@ -67,14 +67,14 @@ import Process from 'process-js';
 const process = new Process;
 
 process
-	.setSource(
-		arr => _.sortBy(arr),
+  .setSource(
+    arr => _.sortBy(arr),
     ['https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js']
-	)
-	.postMessage([3, 2, 0, 1])
-	.then(
-	  result => console.log('Log ::: Result ::: ', result)
-	);
+  )
+  .postMessage([3, 2, 0, 1])
+  .then(
+    result => console.log('Log ::: Result ::: ', result)
+  );
 ```
 
 ## Install
@@ -129,15 +129,15 @@ const process = new Process;
 
 process
   // set source (fn and deps)
-	.setSource(
-	  num => num ** 2
-	)
+  .setSource(
+    num => num ** 2
+  )
   // send data for calculation
-	.postMessage(12)
+  .postMessage(12)
   // get result
-	.then(
-	  result => console.log('Log ::: Result ::: ', result)
-	);
+  .then(
+    result => console.log('Log ::: Result ::: ', result)
+  );
 ```
 
 #### With dependencies
@@ -151,18 +151,18 @@ const process = new Process;
 
 process
   // set source (fn and deps)
-	.setSource(
-  	// fn
-	  arr => _.sortBy(arr),
+  .setSource(
+    // fn
+    arr => _.sortBy(arr),
     // array of dependencies
     ['https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js']
-	)
+  )
   // send data for calculation
-	.postMessage([3, 2, 0, 1])
+  .postMessage([3, 2, 0, 1])
   // get result
-	.then(
-	  result => console.log('Log ::: Result ::: ', result)
-	);
+  .then(
+    result => console.log('Log ::: Result ::: ', result)
+  );
 ```
 
 #### Full Promise support
@@ -183,13 +183,13 @@ const calc_03 = process_02.setSource(
 
 Promise.all(
     [
-    	calc_01.postMessage([3, 1, 2]),
-	    calc_02.postMessage(12),
+      calc_01.postMessage([3, 1, 2]),
+      calc_02.postMessage(12),
       calc_03.postMessage(['x', 'y', 'z', 'a', 123])
-	]
+  ]
 )
 .then(result => {
-	process_01.kill();
+  process_01.kill();
   process_02.kill();
   console.log('Log ::: Result ::: ', result);
 });
