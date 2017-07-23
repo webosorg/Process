@@ -182,10 +182,10 @@ const calc_03 = process_02.setSource(
 );
 
 Promise.all(
-    [
-      calc_01.postMessage([3, 1, 2]),
-      calc_02.postMessage(12),
-      calc_03.postMessage(['x', 'y', 'z', 'a', 123])
+  [
+    calc_01.postMessage([3, 1, 2]),
+    calc_02.postMessage(12),
+    calc_03.postMessage(['x', 'y', 'z', 'a', 123])
   ]
 )
 .then(result => {
