@@ -1,6 +1,6 @@
 # Process-js
 
-[![(a histogram of downloads)](https://nodei.co/npm-dl/process-js.png?height=3)](https://npmjs.org/package/process-js)
+[![(a histogram of downloads)](https://nodei.co/npm-dl/process-js.png)](https://npmjs.org/package/process-js)
 
 ## Synopsys
 
