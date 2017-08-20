@@ -27,19 +27,17 @@ export default class CreateWorkerSource {
 
   /**
    * Public method for creating source for worker
-   * @returns {Function}
+   * @returns {string}
    */
 
   workerSource() {
-    return Function(
-      `
-        importScripts(${this.deps});
-        const fn = ${this.fn};
-        self.onmessage = msg => {
-          const result = fn(msg.data);
-          self.postMessage(result);
-        }
-      `
-    );
+    return `
+      importScripts(${this.deps});
+      const fn = ${this.fn};
+      self.onmessage = msg => {
+        const result = fn(msg.data);
+        self.postMessage(result);
+      }
+    `;
   }
 }

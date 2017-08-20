@@ -64,13 +64,9 @@ export default class Process {
 
         } else {
 
-            let workerSource = new CreateWorkerSource(fn, deps).workerSource();
+            const source = new CreateWorkerSource(fn, deps).workerSource();
 
-            const source = workerSource.toString();
-
-            const code = source.substring(source.indexOf('{') + 1, source.lastIndexOf('}'));
-
-            let blob = new Blob([ code ], {type: 'application/javascript'});
+            let blob = new Blob([ source ], {type: 'application/javascript'});
 
             const worker = new Worker(URL.createObjectURL(blob));
 

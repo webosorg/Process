@@ -31,13 +31,9 @@ const myWorker = new Worker('./myWorker.js');
 2) Or if we want to create it in a dynamic way, we can write:
 
 ```js
-const workerFn = Function('console.log("Hello world")');
+const source = 'console.log("Hello world")';
 
-let code = workerFn.toString();
-
-code = code.substring(code.indexOf("{")+1, code.lastIndexOf("}"));
-
-const blob = new Blob([code], {type: 'application/javascript'});
+const blob = new Blob([source], {type: 'application/javascript'});
 
 const myWorker = new Worker(URL.createObjectURL(blob));
 ```
