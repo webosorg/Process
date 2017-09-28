@@ -7,7 +7,7 @@
 
 import { getDefaultOptions } from './defaultOptions.js';
 
-import CreateWorkerSource from './utils/CreateWorkerSource.js';
+import CreateWorkerSource from './utils/createWorkerSource.js';
 
 import { generateRandomId } from './utils/generators.js';
 
