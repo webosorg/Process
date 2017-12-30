@@ -9,7 +9,7 @@
  * The Thread class
  */
 
-class Thread {
+export default class Thread {
     
     /**
      * Create a worker
@@ -45,5 +45,3 @@ class Thread {
         this.__worker.terminate();
     }
 }
-
-export default Thread;
