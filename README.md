@@ -194,4 +194,4 @@ Promise.all(
 
 ## License
 
-MIT
+[MIT licensed](LICENSE)
