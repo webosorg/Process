@@ -1,6 +1,6 @@
-# Process-js
+# @webos/process
 
-[![(a histogram of downloads)](https://nodei.co/npm-dl/process-js.png)](https://npmjs.org/package/process-js)
+[![(a histogram of downloads)](https://nodei.co/npm-dl/@webos/process.png)](https://www.npmjs.com/package/@webos/process)
 
 ## Synopsys
 
@@ -38,11 +38,11 @@ const blob = new Blob([source], {type: 'application/javascript'});
 const myWorker = new Worker(URL.createObjectURL(blob));
 ```
 
-process-js lets us create dynamic workers in main thread, use and manage them more comfortably and with promise support.
+@webos/process lets us create dynamic workers in main thread, use and manage them more comfortably and with promise support.
 There is no need to create a new file, also there is no need in onmessage or onerror callbacks, the latest will work with promise support. For example:
 
 ```js
-import Process from 'process-js';
+import Process from '@webos/process';
 
 const process = new Process;
 
@@ -56,10 +56,10 @@ process
   );
 ```
 
-process-js also allows to define dependencies for workers
+@webos/process also allows to define dependencies for workers
 
 ```js
-import Process from 'process-js';
+import Process from '@webos/process';
 
 const process = new Process;
 
@@ -76,20 +76,20 @@ process
 
 ## Install
 
-[![(npm package version)](https://nodei.co/npm/process-js.png?downloads=true&downloadRank=true)](https://npmjs.org/package/process-js)
+[![(npm package version)](https://nodei.co/npm/@webos/process.png?downloads=true&downloadRank=true)](https://npmjs.org/package/@webos/process)
 
 ### Install for usage
 
 **Latest packaged version :::**
 
 ```bash
-npm i process-js
+npm i @webos/process
 ```
  
 or
  
 ```bash
-yarn add process-js
+yarn add @webos/process
 ```
 
 **Latest version available in GitHub :::**
@@ -117,8 +117,8 @@ git clone https://github.com/webosorg/Process.git
 #### Simple usage
 
 ```js
-// Import process-js
-import Process from 'process-js';
+// Import @webos/process
+import Process from '@webos/process';
 
 // Create a new process
 
@@ -140,8 +140,8 @@ process
 #### With dependencies
 
 ```js
-// Import process-js
-import Process from 'process-js';
+// Import @webos/process
+import Process from '@webos/process';
 
 // Create a new process
 const process = new Process;
