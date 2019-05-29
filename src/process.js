@@ -5,7 +5,7 @@
  * @author @SurenAt93
  */
 import { getDefaultOptions } from './defaultOptions.js';
-import CreateWorkerSource from './utils/createWorkerSource.js';
+import createWorkerSource from './utils/createWorkerSource.js';
 import { generateRandomId } from './utils/generators.js';
 import Thread from './thread.js';
 
@@ -38,25 +38,34 @@ export default class Process {
 
   /**
    * Public method for setting source for process
-   * @param {Function} fn - The function, which should run in new process
+   * @param {Function|String} source - The function, which should run in new process
+   * or it also can be a string with particular function inside
    * @param {Array} deps - Optional ::: Dependencies for new env
    * @returns {Thread} - The Promisified worker
    */
-  setSource(fn, deps = []) {
-    if (!fn) {
+  setSource(source, deps = [], fnName) {
+    let isFunction = false;
+    if (!source) {
       throw new Error('Failed to construct ::: First argument required');
-    } else if (typeof fn !== 'function') {
-      throw new Error(`'fn' in new process should be Function`);
+    } else if (typeof source === 'function') {
+      isFunction = true;
+    } else if (typeof source === 'string') {
+      if (!fnName) {
+        throw new Error(`Failed to construct ::: If you are trying to execute the source as a string
+          you also need to provide a function name as a third argument.`);
+      }
     } else {
-      const source = new CreateWorkerSource(fn, deps).workerSource();
-      const blob = new Blob([ source ], {type: 'application/javascript'});
-      const worker = new Worker(URL.createObjectURL(blob));
-      const currentThreadId = generateRandomId();
-
-      this.__threads[currentThreadId] = new Thread(worker);
-
-      return this.__threads[currentThreadId];
+      throw new Error(`The type of "source" should be either function or string`);
     }
+
+    const transformedSource = createWorkerSource(isFunction, source, deps, fnName);
+    const blob = new Blob([transformedSource], { type: 'application/javascript' });
+    const worker = new Worker(URL.createObjectURL(blob));
+    const currentThreadId = generateRandomId();
+
+    this.__threads[currentThreadId] = new Thread(worker);
+
+    return this.__threads[currentThreadId];
   }
 
   /**

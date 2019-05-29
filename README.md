@@ -38,13 +38,13 @@ const blob = new Blob([source], {type: 'application/javascript'});
 const myWorker = new Worker(URL.createObjectURL(blob));
 ```
 
-@webos/process lets us create dynamic workers in main thread, use and manage them more comfortably and with promise support.
+@webos/process lets us create dynamic workers, use and manage them more comfortably and with promise support.
 There is no need to create a new file, also there is no need in onmessage or onerror callbacks, the latest will work with promise support. For example:
 
 ```js
 import Process from '@webos/process';
 
-const process = new Process;
+const process = new Process();
 
 process
   .setSource(
@@ -74,13 +74,52 @@ process
   );
 ```
 
+Also, you can pass a string to *.setSrouce* method as a source; in that case, you also need to pass the function name (which is going to be executed from source as a final function) as a third parameter. For example:
+
+```js
+import Process from '@webos/process';
+
+const process = new Process;
+
+process
+  .setSource(
+    `
+      const fibs = {};
+
+      function fib(n) {
+        if (n < 2) {
+          return n;
+        } else {
+          if (!((n - 1) in fibs)) {
+            fibs[n - 1] = fib(n - 1);
+          }
+          if (!((n - 2) in fibs)) {
+            fibs[n - 2] = fib(n -2);
+          }
+          return fibs[n - 1] + fibs[n - 2];
+        }
+      }
+
+      function anotherFunction(x) { return x + 1 }
+
+      const oneMoreFunction = opt => { //... }
+    `,
+    [],
+    'fib' // we want to "work" exactly with 'fib' function
+  )
+  .postMessage(14)
+  .then(
+    result => console.log('Log ::: Result ::: ', result)
+  );
+```
+
 ## Install
 
 [![(npm package version)](https://nodei.co/npm/@webos/process.png?downloads=true&downloadRank=true)](https://npmjs.org/package/@webos/process)
 
 ### Install for usage
 
-**Latest packaged version :::**
+**Latest packaged version**
 
 ```bash
 npm i @webos/process
@@ -92,7 +131,7 @@ or
 yarn add @webos/process
 ```
 
-**Latest version available in GitHub :::**
+**Latest version available in GitHub**
 
 ```bash
 npm i https://github.com/webosorg/Process

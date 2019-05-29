@@ -4,7 +4,8 @@ const process = new Process;
 
 process
   .setSource(
-    num => num ** 2
+    num => num ** 3,
+    [],
   )
   .postMessage(12)
   .then(
